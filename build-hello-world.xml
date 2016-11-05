@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="phpbuild" default="welcome" basedir="." description="this is phing demo">
+  <!-- Define variable -->
+  <property name="message" value ="Hello world!"/>
+
+  <!-- Group of task -->
+  <target name="welcome">
+    <!-- Single task -->
+    <echo msg = "${message}"/>
+  </target>
+
+</project>
