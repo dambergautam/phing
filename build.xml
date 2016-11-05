@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="phpbuild" default="welcome" basedir="." description="this is phing demo">
+  <!-- Define variable -->
+  <property name="message" value ="Hello world!"/>
+  <property name="db.name" value ="fellowship"/>
+  <property name="db.user.name" value ="root"/>
+  <property name="db.password" value =""/>
+  <property name="url" value ="fellowship.apnic.net"/>
+  <property name="buildDir" value ="js"/>
+
+
+
+  <!-- Group of task -->
+  <target name="welcome">
+    <!-- Single task -->
+    <echo msg = "${message}"/>
+  </target>
+
+  <fileset dir="./" id="srcfiles">
+   <include name="*"/>
+   <exclude name="*.tmp"/>
+  </fileset>
+
+  <target name ="copyfile">
+    <echo msg ="File are being copied.. ${buildDir}" />
+    <copy todir="${buildDir}">
+    <fileset refid="srcfiles"/>
+    </copy>
+  </target>
+
+</project>

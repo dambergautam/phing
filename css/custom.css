@@ -1,0 +1,10 @@
+.title{
+font-size: 24px;
+color: #C5CBE8;
+text-transform: uppercase;
+font-weight: 500;
+border-bottom: 2px solid burlywood;
+margin-bottom: 16px;
+display: inline-block;
+padding-bottom: 5px;
+}

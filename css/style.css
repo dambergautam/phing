@@ -1,0 +1,19 @@
+body{
+  background-color: #414247;
+}
+#container{
+    width: 80%;
+    margin: 0 auto;
+    background-color: #313445;
+    color: #ADAFB8;
+
+    border-radius: 10px;
+    padding: 30px;
+}
+
+.box{
+    border: 1px solid #414247;
+    padding: 10px;
+    font-family: monospace;
+    font-size: 15px;
+}
