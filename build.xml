@@ -1,30 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="phpbuild" default="welcome" basedir="." description="this is phing demo">
   <!-- Define variable -->
-  <property name="message" value ="Hello world!"/>
-  <property name="db.name" value ="fellowship"/>
-  <property name="db.user.name" value ="root"/>
-  <property name="db.password" value =""/>
-  <property name="url" value ="fellowship.apnic.net"/>
-  <property name="buildDir" value ="js"/>
+  <property name="message" value ="Welcome to PHP awesome build too 'PHING'"/>
+  <property name="fileLoc" value ="css"/>
+  <property name="dirLoc" value ="js"/>
 
-
-
-  <!-- Group of task -->
+  <!-- define task -print message | command : $ phing or $ phing welcome -->
   <target name="welcome">
-    <!-- Single task -->
-    <echo msg = "${message}"/>
+   <echo msg = "${message}"/>
   </target>
 
+  <!-- define task- copy file | command : $ phing copyfile -->
+  <target name ="copyfile">
+    <echo msg ="File are being copied.. " />
+    <copy file="./index.php" tofile="./new-index.php" />
+  </target>
+
+  <!-- define fileset location and id as ref -->
   <fileset dir="./" id="srcfiles">
    <include name="*"/>
-   <exclude name="*.tmp"/>
+   <exclude name="*.xml"/>
   </fileset>
 
-  <target name ="copyfile">
-    <echo msg ="File are being copied.. ${buildDir}" />
-    <copy todir="${buildDir}">
-    <fileset refid="srcfiles"/>
+  <!-- define task - copy everything except .xml file into js using above ref(srcfiles) -->
+  <!-- command : $ phing copydir -->
+  <target name="copydir">
+    <echo msg ="Directory copying.." />
+    <copy todir="${dirLoc}">
+      <fileset refid="srcfiles"/>
     </copy>
   </target>
 
