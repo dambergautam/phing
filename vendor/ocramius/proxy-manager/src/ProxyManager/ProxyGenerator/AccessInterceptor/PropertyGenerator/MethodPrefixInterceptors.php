@@ -16,6 +16,8 @@
  * and is licensed under the MIT license.
  */
 
+declare(strict_types=1);
+
 namespace ProxyManager\ProxyGenerator\AccessInterceptor\PropertyGenerator;
 
 use ProxyManager\Generator\Util\UniqueIdentifierGenerator;
@@ -36,7 +38,7 @@ class MethodPrefixInterceptors extends PropertyGenerator
     {
         parent::__construct(UniqueIdentifierGenerator::getIdentifier('methodPrefixInterceptors'));
 
-        $this->setDefaultValue(array());
+        $this->setDefaultValue([]);
         $this->setVisibility(self::VISIBILITY_PRIVATE);
         $this->setDocblock('@var \\Closure[] map of interceptors to be called per-method before execution');
     }

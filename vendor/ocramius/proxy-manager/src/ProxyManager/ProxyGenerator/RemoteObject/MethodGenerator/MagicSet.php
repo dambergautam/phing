@@ -16,10 +16,12 @@
  * and is licensed under the MIT license.
  */
 
+declare(strict_types=1);
+
 namespace ProxyManager\ProxyGenerator\RemoteObject\MethodGenerator;
 
 use ProxyManager\Generator\MagicMethodGenerator;
-use ProxyManager\Generator\ParameterGenerator;
+use Zend\Code\Generator\ParameterGenerator;
 use ReflectionClass;
 use Zend\Code\Generator\PropertyGenerator;
 
@@ -41,7 +43,7 @@ class MagicSet extends MagicMethodGenerator
         parent::__construct(
             $originalClass,
             '__set',
-            array(new ParameterGenerator('name'), new ParameterGenerator('value'))
+            [new ParameterGenerator('name'), new ParameterGenerator('value')]
         );
 
         $this->setDocblock('@param string \$name\n@param mixed \$value');

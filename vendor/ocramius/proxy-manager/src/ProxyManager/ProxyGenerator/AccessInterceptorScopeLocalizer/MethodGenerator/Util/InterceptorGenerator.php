@@ -16,6 +16,8 @@
  * and is licensed under the MIT license.
  */
 
+declare(strict_types=1);
+
 namespace ProxyManager\ProxyGenerator\AccessInterceptorScopeLocalizer\MethodGenerator\Util;
 
 use ProxyManager\Generator\MethodGenerator;
@@ -27,8 +29,7 @@ use Zend\Code\Generator\PropertyGenerator;
  * @author Marco Pivetta <ocramius@gmail.com>
  * @license MIT
  *
- * @internal - this class is just here as a small utility for this component,
- * don't use it in your own code
+ * @private - this class is just here as a small utility for this component, don't use it in your own code
  */
 class InterceptorGenerator
 {
@@ -43,15 +44,15 @@ class InterceptorGenerator
      * @return string
      */
     public static function createInterceptedMethodBody(
-        $methodBody,
+        string $methodBody,
         MethodGenerator $method,
         PropertyGenerator $prefixInterceptors,
         PropertyGenerator $suffixInterceptors
-    ) {
+    ) : string {
         $name               = var_export($method->getName(), true);
         $prefixInterceptors = $prefixInterceptors->getName();
         $suffixInterceptors = $suffixInterceptors->getName();
-        $params             = array();
+        $params             = [];
 
         foreach ($method->getParameters() as $parameter) {
             $parameterName = $parameter->getName();

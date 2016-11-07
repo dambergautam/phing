@@ -16,6 +16,10 @@ class ComposerStaticInitab3041cfa61601704fae02c53cb1e1f9
             'Zend\\EventManager\\' => 18,
             'Zend\\Code\\' => 10,
         ),
+        'T' => 
+        array (
+            'Test\\' => 5,
+        ),
         'S' => 
         array (
             'Symfony\\Polyfill\\Mbstring\\' => 26,
@@ -26,6 +30,7 @@ class ComposerStaticInitab3041cfa61601704fae02c53cb1e1f9
         'P' => 
         array (
             'Psr\\Log\\' => 8,
+            'PackageVersions\\' => 16,
         ),
         'D' => 
         array (
@@ -33,6 +38,10 @@ class ComposerStaticInitab3041cfa61601704fae02c53cb1e1f9
             'Doctrine\\Common\\Cache\\' => 22,
             'Doctrine\\Common\\Annotations\\' => 28,
             'Doctrine\\Common\\' => 16,
+        ),
+        'C' => 
+        array (
+            'Corgi\\File\\' => 11,
         ),
     );
 
@@ -44,6 +53,10 @@ class ComposerStaticInitab3041cfa61601704fae02c53cb1e1f9
         'Zend\\Code\\' => 
         array (
             0 => __DIR__ . '/..' . '/zendframework/zend-code/src',
+        ),
+        'Test\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/corgi-php/corgi-file/tests',
         ),
         'Symfony\\Polyfill\\Mbstring\\' => 
         array (
@@ -65,6 +78,10 @@ class ComposerStaticInitab3041cfa61601704fae02c53cb1e1f9
         array (
             0 => __DIR__ . '/..' . '/psr/log/Psr/Log',
         ),
+        'PackageVersions\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/ocramius/package-versions/src/PackageVersions',
+        ),
         'Doctrine\\DBAL\\Migrations\\' => 
         array (
             0 => __DIR__ . '/..' . '/doctrine/migrations/lib/Doctrine/DBAL/Migrations',
@@ -80,6 +97,10 @@ class ComposerStaticInitab3041cfa61601704fae02c53cb1e1f9
         'Doctrine\\Common\\' => 
         array (
             0 => __DIR__ . '/..' . '/doctrine/common/lib/Doctrine/Common',
+        ),
+        'Corgi\\File\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/corgi-php/corgi-file/src',
         ),
     );
 

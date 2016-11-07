@@ -1,4 +1,4 @@
-name: Client Name Migrations
+name: Doctrine Migrations
 migrations_namespace: DoctrineMigrations
 table_name: doctrine_migration_versions
-migrations_directory: /migration/DoctrineMigrations
+migrations_directory: /DoctrineMigrations

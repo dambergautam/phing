@@ -16,12 +16,14 @@
  * and is licensed under the MIT license.
  */
 
+declare(strict_types=1);
+
 namespace ProxyManager;
 
 use ProxyManager\Autoloader\Autoloader;
 use ProxyManager\Autoloader\AutoloaderInterface;
 use ProxyManager\FileLocator\FileLocator;
-use ProxyManager\GeneratorStrategy\FileWriterGeneratorStrategy;
+use ProxyManager\GeneratorStrategy\EvaluatingGeneratorStrategy;
 use ProxyManager\GeneratorStrategy\GeneratorStrategyInterface;
 use ProxyManager\Inflector\ClassNameInflector;
 use ProxyManager\Inflector\ClassNameInflectorInterface;
@@ -83,36 +85,16 @@ class Configuration
     protected $classSignatureGenerator;
 
     /**
-     * @deprecated deprecated since version 0.5
-     * @codeCoverageIgnore
-     */
-    public function setAutoGenerateProxies()
-    {
-    }
-
-    /**
-     * @return bool
-     *
-     * @deprecated deprecated since version 0.5
-     * @codeCoverageIgnore
-     */
-    public function doesAutoGenerateProxies()
-    {
-        return true;
-    }
-
-    /**
      * @param AutoloaderInterface $proxyAutoloader
+     *
+     * @return void
      */
     public function setProxyAutoloader(AutoloaderInterface $proxyAutoloader)
     {
         $this->proxyAutoloader = $proxyAutoloader;
     }
 
-    /**
-     * @return AutoloaderInterface
-     */
-    public function getProxyAutoloader()
+    public function getProxyAutoloader() : AutoloaderInterface
     {
         return $this->proxyAutoloader
             ?: $this->proxyAutoloader = new Autoloader(
@@ -123,67 +105,61 @@ class Configuration
 
     /**
      * @param string $proxiesNamespace
+     *
+     * @return void
      */
-    public function setProxiesNamespace($proxiesNamespace)
+    public function setProxiesNamespace(string $proxiesNamespace)
     {
         $this->proxiesNamespace = $proxiesNamespace;
     }
 
-    /**
-     * @return string
-     */
-    public function getProxiesNamespace()
+    public function getProxiesNamespace() : string
     {
         return $this->proxiesNamespace;
     }
 
     /**
      * @param string $proxiesTargetDir
+     *
+     * @return void
      */
-    public function setProxiesTargetDir($proxiesTargetDir)
+    public function setProxiesTargetDir(string $proxiesTargetDir)
     {
-        $this->proxiesTargetDir = (string) $proxiesTargetDir;
+        $this->proxiesTargetDir = $proxiesTargetDir;
     }
 
-    /**
-     * @return string
-     */
-    public function getProxiesTargetDir()
+    public function getProxiesTargetDir() : string
     {
         return $this->proxiesTargetDir ?: $this->proxiesTargetDir = sys_get_temp_dir();
     }
 
     /**
      * @param GeneratorStrategyInterface $generatorStrategy
+     *
+     * @return void
      */
     public function setGeneratorStrategy(GeneratorStrategyInterface $generatorStrategy)
     {
         $this->generatorStrategy = $generatorStrategy;
     }
 
-    /**
-     * @return GeneratorStrategyInterface
-     */
-    public function getGeneratorStrategy()
+    public function getGeneratorStrategy() : GeneratorStrategyInterface
     {
         return $this->generatorStrategy
-            ?: $this->generatorStrategy = new FileWriterGeneratorStrategy(
-                new FileLocator($this->getProxiesTargetDir())
-            );
+            ?: $this->generatorStrategy = new EvaluatingGeneratorStrategy();
     }
 
     /**
      * @param ClassNameInflectorInterface $classNameInflector
+     *
+     * @return void
      */
     public function setClassNameInflector(ClassNameInflectorInterface $classNameInflector)
     {
         $this->classNameInflector = $classNameInflector;
     }
 
-    /**
-     * @return ClassNameInflectorInterface
-     */
-    public function getClassNameInflector()
+    public function getClassNameInflector() : ClassNameInflectorInterface
     {
         return $this->classNameInflector
             ?: $this->classNameInflector = new ClassNameInflector($this->getProxiesNamespace());
@@ -191,32 +167,30 @@ class Configuration
 
     /**
      * @param SignatureGeneratorInterface $signatureGenerator
+     *
+     * @return void
      */
     public function setSignatureGenerator(SignatureGeneratorInterface $signatureGenerator)
     {
         $this->signatureGenerator = $signatureGenerator;
     }
 
-    /**
-     * @return SignatureGeneratorInterface
-     */
-    public function getSignatureGenerator()
+    public function getSignatureGenerator() : SignatureGeneratorInterface
     {
         return $this->signatureGenerator ?: $this->signatureGenerator = new SignatureGenerator();
     }
 
     /**
      * @param SignatureCheckerInterface $signatureChecker
+     *
+     * @return void
      */
     public function setSignatureChecker(SignatureCheckerInterface $signatureChecker)
     {
         $this->signatureChecker = $signatureChecker;
     }
 
-    /**
-     * @return SignatureCheckerInterface
-     */
-    public function getSignatureChecker()
+    public function getSignatureChecker() : SignatureCheckerInterface
     {
         return $this->signatureChecker
             ?: $this->signatureChecker = new SignatureChecker($this->getSignatureGenerator());
@@ -224,16 +198,15 @@ class Configuration
 
     /**
      * @param ClassSignatureGeneratorInterface $classSignatureGenerator
+     *
+     * @return void
      */
     public function setClassSignatureGenerator(ClassSignatureGeneratorInterface $classSignatureGenerator)
     {
         $this->classSignatureGenerator = $classSignatureGenerator;
     }
 
-    /**
-     * @return ClassSignatureGeneratorInterface
-     */
-    public function getClassSignatureGenerator()
+    public function getClassSignatureGenerator() : ClassSignatureGeneratorInterface
     {
         return $this->classSignatureGenerator
             ?: new ClassSignatureGenerator($this->getSignatureGenerator());

@@ -16,16 +16,19 @@
  * and is licensed under the MIT license.
  */
 
+declare(strict_types=1);
+
 namespace ProxyManager\ProxyGenerator;
 
 use ProxyManager\Generator\Util\ClassGeneratorUtils;
+use ProxyManager\Proxy\RemoteObjectInterface;
 use ProxyManager\ProxyGenerator\Assertion\CanProxyAssertion;
-use ProxyManager\ProxyGenerator\RemoteObject\MethodGenerator\Constructor;
 use ProxyManager\ProxyGenerator\RemoteObject\MethodGenerator\MagicGet;
 use ProxyManager\ProxyGenerator\RemoteObject\MethodGenerator\MagicIsset;
 use ProxyManager\ProxyGenerator\RemoteObject\MethodGenerator\MagicSet;
 use ProxyManager\ProxyGenerator\RemoteObject\MethodGenerator\MagicUnset;
 use ProxyManager\ProxyGenerator\RemoteObject\MethodGenerator\RemoteObjectMethod;
+use ProxyManager\ProxyGenerator\RemoteObject\MethodGenerator\StaticProxyConstructor;
 use ProxyManager\ProxyGenerator\RemoteObject\PropertyGenerator\AdapterProperty;
 use ProxyManager\ProxyGenerator\Util\ProxiedMethodsFilter;
 use ReflectionClass;
@@ -51,7 +54,7 @@ class RemoteObjectGenerator implements ProxyGeneratorInterface
     {
         CanProxyAssertion::assertClassCanBeProxied($originalClass);
 
-        $interfaces = array('ProxyManager\\Proxy\\RemoteObjectInterface');
+        $interfaces = [RemoteObjectInterface::class];
 
         if ($originalClass->isInterface()) {
             $interfaces[] = $originalClass->getName();
@@ -68,7 +71,7 @@ class RemoteObjectGenerator implements ProxyGeneratorInterface
             },
             array_merge(
                 array_map(
-                    function (ReflectionMethod $method) use ($adapter, $originalClass) {
+                    function (ReflectionMethod $method) use ($adapter, $originalClass) : RemoteObjectMethod {
                         return RemoteObjectMethod::generateMethod(
                             new MethodReflection($method->getDeclaringClass()->getName(), $method->getName()),
                             $adapter,
@@ -77,16 +80,16 @@ class RemoteObjectGenerator implements ProxyGeneratorInterface
                     },
                     ProxiedMethodsFilter::getProxiedMethods(
                         $originalClass,
-                        array('__get', '__set', '__isset', '__unset')
+                        ['__get', '__set', '__isset', '__unset']
                     )
                 ),
-                array(
-                    new Constructor($originalClass, $adapter),
+                [
+                    new StaticProxyConstructor($originalClass, $adapter),
                     new MagicGet($originalClass, $adapter),
                     new MagicSet($originalClass, $adapter),
                     new MagicIsset($originalClass, $adapter),
                     new MagicUnset($originalClass, $adapter),
-                )
+                ]
             )
         );
     }

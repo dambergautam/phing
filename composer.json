@@ -1,5 +1,6 @@
 {
     "require": {
-        "doctrine/migrations": "^1.4"
+        "doctrine/migrations": "^1.4",
+        "corgi-php/corgi-file": "0.2.2"
     }
 }

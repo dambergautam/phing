@@ -16,10 +16,13 @@
  * and is licensed under the MIT license.
  */
 
+declare(strict_types=1);
+
 namespace ProxyManager\ProxyGenerator\AccessInterceptor\MethodGenerator;
 
+use Closure;
 use ProxyManager\Generator\MethodGenerator;
-use ProxyManager\Generator\ParameterGenerator;
+use Zend\Code\Generator\ParameterGenerator;
 use Zend\Code\Generator\PropertyGenerator;
 
 /**
@@ -33,6 +36,8 @@ class SetMethodSuffixInterceptor extends MethodGenerator
 {
     /**
      * Constructor
+     *
+     * @param PropertyGenerator $suffixInterceptor
      */
     public function __construct(PropertyGenerator $suffixInterceptor)
     {
@@ -40,9 +45,9 @@ class SetMethodSuffixInterceptor extends MethodGenerator
 
         $interceptor = new ParameterGenerator('suffixInterceptor');
 
-        $interceptor->setType('Closure');
+        $interceptor->setType(Closure::class);
         $interceptor->setDefaultValue(null);
-        $this->setParameter(new ParameterGenerator('methodName'));
+        $this->setParameter(new ParameterGenerator('methodName', 'string'));
         $this->setParameter($interceptor);
         $this->setDocblock('{@inheritDoc}');
         $this->setBody('$this->' . $suffixInterceptor->getName() . '[$methodName] = $suffixInterceptor;');

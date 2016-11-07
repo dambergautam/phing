@@ -16,6 +16,8 @@
  * and is licensed under the MIT license.
  */
 
+declare(strict_types=1);
+
 namespace ProxyManager\ProxyGenerator\AccessInterceptorScopeLocalizer\MethodGenerator;
 
 use ProxyManager\Generator\MagicMethodGenerator;
@@ -33,6 +35,10 @@ class MagicSleep extends MagicMethodGenerator
 {
     /**
      * Constructor
+     *
+     * @param ReflectionClass   $originalClass
+     * @param PropertyGenerator $prefixInterceptors
+     * @param PropertyGenerator $suffixInterceptors
      */
     public function __construct(
         ReflectionClass $originalClass,

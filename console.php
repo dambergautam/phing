@@ -1,18 +1,28 @@
 <?php
-// application.php
+require __DIR__.'/vendor/autoload.php';
 
-require __DIR__.'\vendor\autoload.php';
+$params= array(
+    'dbname' => 'tst_damber',
+    'user' => 'root',
+    'password' => 'damber123',
+    'host' => 'localhost',
+    'driver' => 'mysqli'
+);
 
-//require __DIR__.'\migration\migrations.yml';
-require __DIR__.'\migration\migrations-db.php';
 
-$db = \Doctrine\DBAL\DriverManager::getConnection($params);
-
-
-
+use Doctrine\DBAL\DriverManager;
 use Symfony\Component\Console\Application;
+use Symfony\Component\Console\Helper\HelperSet;
+
+$db = DriverManager::getConnection($params);
+$helperSet = new HelperSet(array(
+    'db' => new \Doctrine\DBAL\Tools\Console\Helper\ConnectionHelper($db),
+    'dialog' => new \Symfony\Component\Console\Helper\QuestionHelper
+));
+
 
 $application = new Application();
+$application->setHelperSet($helperSet);
 
 // ... register commands
 $application->addCommands(array(

@@ -16,6 +16,8 @@
  * and is licensed under the MIT license.
  */
 
+declare(strict_types=1);
+
 namespace ProxyManager\ProxyGenerator\Assertion;
 
 use BadMethodCallException;
@@ -45,9 +47,11 @@ final class CanProxyAssertion
      * @param ReflectionClass $originalClass
      * @param bool            $allowInterfaces
      *
+     * @return void
+     *
      * @throws InvalidProxiedClassException
      */
-    public static function assertClassCanBeProxied(ReflectionClass $originalClass, $allowInterfaces = true)
+    public static function assertClassCanBeProxied(ReflectionClass $originalClass, bool $allowInterfaces = true)
     {
         self::isNotFinal($originalClass);
         self::hasNoAbstractProtectedMethods($originalClass);
@@ -59,6 +63,8 @@ final class CanProxyAssertion
 
     /**
      * @param ReflectionClass $originalClass
+     *
+     * @return void
      *
      * @throws InvalidProxiedClassException
      */
@@ -72,13 +78,15 @@ final class CanProxyAssertion
     /**
      * @param ReflectionClass $originalClass
      *
+     * @return void
+     *
      * @throws InvalidProxiedClassException
      */
     private static function hasNoAbstractProtectedMethods(ReflectionClass $originalClass)
     {
         $protectedAbstract = array_filter(
             $originalClass->getMethods(),
-            function (ReflectionMethod $method) {
+            function (ReflectionMethod $method) : bool {
                 return $method->isAbstract() && $method->isProtected();
             }
         );
@@ -90,6 +98,8 @@ final class CanProxyAssertion
 
     /**
      * @param ReflectionClass $originalClass
+     *
+     * @return void
      *
      * @throws InvalidProxiedClassException
      */

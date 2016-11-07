@@ -16,11 +16,12 @@
  * and is licensed under the MIT license.
  */
 
+declare(strict_types=1);
+
 namespace ProxyManager\ProxyGenerator\PropertyGenerator;
 
 use ProxyManager\Generator\Util\UniqueIdentifierGenerator;
-use ReflectionClass;
-use ReflectionProperty;
+use ProxyManager\ProxyGenerator\Util\Properties;
 use Zend\Code\Generator\PropertyGenerator;
 
 /**
@@ -34,16 +35,16 @@ class PublicPropertiesMap extends PropertyGenerator
     /**
      * @var bool[]
      */
-    private $publicProperties = array();
+    private $publicProperties = [];
 
     /**
-     * @param \ReflectionClass $originalClass
+     * @param Properties $properties
      */
-    public function __construct(ReflectionClass $originalClass)
+    public function __construct(Properties $properties)
     {
         parent::__construct(UniqueIdentifierGenerator::getIdentifier('publicProperties'));
 
-        foreach ($originalClass->getProperties(ReflectionProperty::IS_PUBLIC) as $publicProperty) {
+        foreach ($properties->getPublicProperties() as $publicProperty) {
             $this->publicProperties[$publicProperty->getName()] = true;
         }
 
@@ -56,8 +57,8 @@ class PublicPropertiesMap extends PropertyGenerator
     /**
      * @return bool whether there are no public properties
      */
-    public function isEmpty()
+    public function isEmpty() : bool
     {
-        return empty($this->publicProperties);
+        return ! $this->publicProperties;
     }
 }

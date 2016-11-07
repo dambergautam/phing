@@ -16,6 +16,8 @@
  * and is licensed under the MIT license.
  */
 
+declare(strict_types=1);
+
 namespace ProxyManager\ProxyGenerator\LazyLoadingValueHolder\MethodGenerator;
 
 use ProxyManager\Generator\MethodGenerator;
@@ -32,11 +34,14 @@ class IsProxyInitialized extends MethodGenerator
 {
     /**
      * Constructor
+     *
+     * @param PropertyGenerator $valueHolderProperty
      */
     public function __construct(PropertyGenerator $valueHolderProperty)
     {
         parent::__construct('isProxyInitialized');
         $this->setDocblock('{@inheritDoc}');
+        $this->setReturnType('bool');
         $this->setBody('return null !== $this->' . $valueHolderProperty->getName() . ';');
     }
 }

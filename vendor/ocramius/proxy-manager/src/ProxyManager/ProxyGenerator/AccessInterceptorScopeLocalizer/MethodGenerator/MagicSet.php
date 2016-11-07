@@ -16,10 +16,12 @@
  * and is licensed under the MIT license.
  */
 
+declare(strict_types=1);
+
 namespace ProxyManager\ProxyGenerator\AccessInterceptorScopeLocalizer\MethodGenerator;
 
 use ProxyManager\Generator\MagicMethodGenerator;
-use ProxyManager\Generator\ParameterGenerator;
+use Zend\Code\Generator\ParameterGenerator;
 use ProxyManager\ProxyGenerator\AccessInterceptorScopeLocalizer\MethodGenerator\Util\InterceptorGenerator;
 use ProxyManager\ProxyGenerator\Util\PublicScopeSimulator;
 use ReflectionClass;
@@ -46,7 +48,7 @@ class MagicSet extends MagicMethodGenerator
         parent::__construct(
             $originalClass,
             '__set',
-            array(new ParameterGenerator('name'), new ParameterGenerator('value'))
+            [new ParameterGenerator('name'), new ParameterGenerator('value')]
         );
 
         $override = $originalClass->hasMethod('__set');

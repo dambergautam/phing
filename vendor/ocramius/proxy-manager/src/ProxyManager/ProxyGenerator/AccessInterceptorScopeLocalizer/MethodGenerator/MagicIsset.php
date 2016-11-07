@@ -16,10 +16,12 @@
  * and is licensed under the MIT license.
  */
 
+declare(strict_types=1);
+
 namespace ProxyManager\ProxyGenerator\AccessInterceptorScopeLocalizer\MethodGenerator;
 
 use ProxyManager\Generator\MagicMethodGenerator;
-use ProxyManager\Generator\ParameterGenerator;
+use Zend\Code\Generator\ParameterGenerator;
 use ProxyManager\ProxyGenerator\AccessInterceptorScopeLocalizer\MethodGenerator\Util\InterceptorGenerator;
 use ProxyManager\ProxyGenerator\Util\PublicScopeSimulator;
 use ReflectionClass;
@@ -43,7 +45,7 @@ class MagicIsset extends MagicMethodGenerator
         PropertyGenerator $prefixInterceptors,
         PropertyGenerator $suffixInterceptors
     ) {
-        parent::__construct($originalClass, '__isset', array(new ParameterGenerator('name')));
+        parent::__construct($originalClass, '__isset', [new ParameterGenerator('name')]);
 
         $override = $originalClass->hasMethod('__isset');
 

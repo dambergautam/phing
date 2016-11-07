@@ -16,6 +16,8 @@
  * and is licensed under the MIT license.
  */
 
+declare(strict_types=1);
+
 namespace ProxyManager\ProxyGenerator\LazyLoadingGhost\MethodGenerator;
 
 use ProxyManager\Generator\MethodGenerator;
@@ -32,6 +34,8 @@ class GetProxyInitializer extends MethodGenerator
 {
     /**
      * Constructor
+     *
+     * @param PropertyGenerator $initializerProperty
      */
     public function __construct(PropertyGenerator $initializerProperty)
     {
