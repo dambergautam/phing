@@ -11,9 +11,35 @@ body{
     padding: 30px;
 }
 
+.header{
+  font-family: cursive;
+  margin-bottom: 5px;
+  text-align: center;
+}
+
+.header .bigtext{
+  font-size: 28px;
+  color: #4BA3E8;
+  display: block;
+}
+.header .smalltext{
+  font-size: 14px;
+  display: block;
+}
+
 .box{
     border: 1px solid #414247;
     padding: 10px;
     font-family: monospace;
     font-size: 15px;
+}
+.script{
+  background-color:#aaa;
+  color: #301;
+  padding: 5px;
+  font-family: monospace;
+  font-size: 13px;
+}
+.command{
+  color: #4BA3E8;
 }

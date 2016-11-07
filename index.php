@@ -1,3 +1,4 @@
+<?php include_once './include/file_dir_function.inc.php'; ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,18 +9,10 @@
 <body>
 
 <div id="container">
-
+    <div class="header"><span class="bigtext">PHING</span> <span class="smalltext">PHing Is Not GNU make; it's a PHP project build system or build tool.</span></div>
     <div class="box">
-        <label class="title">To do list</label>
-        <div>This is simple to do list application.</div>
-    </div>
-
-    <br />
-    <div class="box">
-        <label class="title">Other title</label>
-        <div> More description goes here.</div>
+        <label class="title">Objectives</label>
         <div>
-          <h3>Objectives</h3>
           <ol>
             <li>Fellowship- Create directory</li>
             <li>Move directory</li>
@@ -30,6 +23,29 @@
         </div>
     </div>
 
+    <div class="box">
+      <label class="title">Build -Print 'Hello World!' </label>
+      <span class="command">$ phing [or $phing welcome]</span>
+      <div class="script">
+        <?php echo "<pre>".(htmlentities($build_hello_world))."</pre>"; ?>
+      </div>
+    </div>
+
+    <div class="box">
+      <label class="title">Build -Copy file and directory </label>
+      <span class="command">$ phing copyfile</span>
+      <div class="script">
+        <?php echo "<pre>".(htmlentities($build_copy_file_dir))."</pre>"; ?>
+      </div>
+    </div>
+
+    <div class="box">
+      <label class="title">Build -Use Depends, Archive and create Directory </label>
+      <span class="command">$ phing archive</span>
+      <div class="script">
+        <?php echo "<pre>".(htmlentities($build_use_Depend_Archive_CreateDir))."</pre>"; ?>
+      </div>
+    </div>
 </div>
 
 
