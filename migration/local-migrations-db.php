@@ -9,7 +9,9 @@ if($mode ==1){
       'user' => 'root',
       'password' => 'damber123',
       'host' => 'localhost',
-      'driver' => 'mysqli'
+      'driver' => 'mysqli',
+      'charset' => 'UTF8',
+      'enum' => 'string'
   );
 
 }else if($mode == 2){
@@ -18,7 +20,9 @@ if($mode ==1){
       'user' => 'root',
       'password' => '',
       'host' => 'localhost',
-      'driver' => 'mysqli'
+      'driver' => 'mysqli',
+      'charset' => 'UTF8',
+      'enum' => 'string'
   );
 }
 
