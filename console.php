@@ -1,14 +1,7 @@
 <?php
 require __DIR__.'/vendor/autoload.php';
 
-$params= array(
-    'dbname' => 'tst_damber',
-    'user' => 'root',
-    'password' => 'damber123',
-    'host' => 'localhost',
-    'driver' => 'mysqli'
-);
-
+include_once('./migration/migrations-db.php');
 
 use Doctrine\DBAL\DriverManager;
 use Symfony\Component\Console\Application;

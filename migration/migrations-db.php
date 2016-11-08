@@ -1,18 +1,10 @@
 <?php
-
-return array(
-    'dbname' => 'tst_damber',
-    'user' => 'root',
-    'password' => 'damber123',
-    'host' => 'localhost',
-    'driver' => 'mysqli'
-);
 //Swithing database connections params
-/*
-$mode = 1;
+
+$mode = 2;
 
 if($mode ==1){
-  return array(
+  $params = array(
       'dbname' => 'tst_damber',
       'user' => 'root',
       'password' => 'damber123',
@@ -21,7 +13,7 @@ if($mode ==1){
   );
 
 }else if($mode == 2){
-  return array(
+  $params = array(
       'dbname' => 'saman_rock',
       'user' => 'root',
       'password' => '',
@@ -42,5 +34,4 @@ if($check_db == 1){
   }
   die();
 }
-*/
 ?>

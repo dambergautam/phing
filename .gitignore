@@ -1,2 +1,4 @@
 bkp-build/
 nbproject/
+vendor/
+composer.lock
